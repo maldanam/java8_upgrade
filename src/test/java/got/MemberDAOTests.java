@@ -1,6 +1,7 @@
 package got;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +55,8 @@ public class MemberDAOTests {
     public void sortByHouseName_sortByNameDesc() {
     	System.out.println("--> Sort members by house name, then by name");
     	allMembers.stream()
-		  .sorted((m1, m2) -> m1.getHouseName().equals(m2.getHouseName()) ? m2.getName().compareTo(m1.getName()) : m1.getHouseName().compareTo(m2.getHouseName()))
+    	  .sorted(Comparator.comparing(Member::getHouseName).thenComparing(Member::getName))
+//		  .sorted((m1, m2) -> m1.getHouseName().equals(m2.getHouseName()) ? m2.getName().compareTo(m1.getName()) : m1.getHouseName().compareTo(m2.getHouseName()))
 		  .forEach(System.out::println);
     }
 
